@@ -1,52 +1,20 @@
-<mvc:View
-    controllerName="com.nick.sample.worklistapp.controller.Worklist"
-    xmlns="sap.m"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns:semantic="sap.f.semantic">
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="com.nick.sample.worklistapp.controller.Worklist">
 
-    <semantic:SemanticPage
-        id="page"
-        headerPinnable="false"
-        toggleHeaderOnTitleClick="false">
+    <semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
 
         <semantic:titleHeading>
-            <Title
-                text="{i18n>worklistTitle}"
-                level="H2"/>
+            <Title text="{i18n>worklistTitle}" level="H2"/>
         </semantic:titleHeading>
 
-        <semantic:content>
-            <Table
-                id="table"
-                width="auto"
-                items="{
-                    path: '/Orders',
-                    sorter: {
-                        path: 'OrderID',
-                        descending: false
-                    }
-                }"
-                noDataText="{worklistView>/tableNoDataText}"
-                busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-                growing="true"
-                growingScrollToLoad="true"
-                updateFinished=".onUpdateFinished">
+        <semantic:content><Table id="table" width="auto" items="{                     path: '/Orders',                     sorter: {                         path: 'OrderID',                         descending: false                     }                 }" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished" sticky="ColumnHeaders" fixedLayout="false">
 
                 <headerToolbar>
                     <OverflowToolbar>
-                        <Title
-                            id="tableHeader"
-                            text="{worklistView>/worklistTableTitle}"
-                            level="H3"/>
-                        <ToolbarSpacer />
-                        <SearchField
-                            id="searchField"
-                            tooltip="{i18n>worklistSearchTooltip}"
-                            search=".onSearch">
+                        <Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3"/>
+                        <ToolbarSpacer/>
+                        <SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch">
                             <layoutData>
-                                <OverflowToolbarLayoutData
-                                    maxWidth="200px"
-                                    priority="NeverOverflow"/>
+                                <OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
                             </layoutData>
                         </SearchField>
                     </OverflowToolbar>
@@ -59,21 +27,32 @@
                     <Column id="unitNumberColumn" hAlign="End">
                         <Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
                     </Column>
+                    <Column id="column1">
+                        <header>
+                            <Label text="Customer ID" id="label1"/>
+                        </header>
+                    </Column>
+                    <Column id="column4">
+                        <header>
+                            <Label text="Required Date" id="label4"/>
+                        </header>
+                    </Column>
+                    <Column id="column5" hAlign="Center">
+                      <Text text="Actions"/>
+                    </Column>
                 </columns>
 
                 <items>
-                    <ColumnListItem
-                        type="Navigation"
-                        press=".onPress">
+                    <ColumnListItem type="Navigation" press=".onPress">
                         <cells>
-                            <ObjectIdentifier
-                                title="{OrderID}"/>
-                            <ObjectNumber
-                                number="{
-                                    path: 'OrderID',
-                                    formatter: '.formatter.numberUnit'
-                                }"
-                                unit="{OrderID}" />
+                            <ObjectIdentifier title="{OrderID}"/>
+                            <ObjectNumber number="{                                     path: 'OrderID',                                     formatter: '.formatter.numberUnit'                                 }" unit="{OrderID}"/>
+                            <Input value="{CustomerID}" width="100%" id="input1"/>
+                            <DatePicker value="{RequiredDate}" width="100%" id="picker0"/>
+                            <HBox>
+                              <Button icon="sap-icon://accept" text="Approve" type="Accept" press="onApprove"/>
+                              <Button icon="sap-icon://decline" text="Reject" type="Reject" press="onReject"/>
+                            </HBox>
                         </cells>
                     </ColumnListItem>
                 </items>

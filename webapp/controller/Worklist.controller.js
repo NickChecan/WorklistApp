@@ -114,6 +114,26 @@ sap.ui.define([
             oTable.getBinding("items").refresh();
         },
 
+        onApprove: function(oEvent){
+            var oButton = oEvent.getSource();   // Approve Button in the row
+    
+            // Get binding context of the button to identify the row where the event is originated
+            var oBindingContext = oButton.getBindingContext();  // <<<-- If you have model name pass it here as string
+            var oBindingObject = oBindingContext.getObject();   // getPath() method gives path to model row number
+            
+            console.log("Selected row Object: ", oBindingObject);
+        },
+          
+        onReject: function(oEvent){
+            var oButton = oEvent.getSource();   // Reject Button in the row
+    
+            // Get binding context of the button to identify the row where the event is originated
+            var oBindingContext = oButton.getBindingContext();  // <<<-- If you have model name pass it here as string
+            var oBindingObject = oBindingContext.getObject();   // getPath() method gives path to model row number
+            
+            console.log("Selected row Object: ", oBindingObject);
+        },
+
         /* =========================================================== */
         /* internal methods                                            */
         /* =========================================================== */
